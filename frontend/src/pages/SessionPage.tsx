@@ -157,6 +157,7 @@ export default function SessionPage() {
         title={`${gameDef?.emoji} תוצאות ${gameDef?.nameHe}`}
         onContinue={handleNextGame}
         continueLabel="משחק הבא 🎲"
+        onEnd={handleEnd}
       />
     );
   }

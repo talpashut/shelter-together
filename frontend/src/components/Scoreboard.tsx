@@ -6,6 +6,7 @@ interface ScoreboardProps {
   title?: string;
   onContinue?: () => void;
   continueLabel?: string;
+  onEnd?: () => void;
 }
 
 export default function Scoreboard({
@@ -14,6 +15,7 @@ export default function Scoreboard({
   title = 'תוצאות',
   onContinue,
   continueLabel = 'משחק הבא',
+  onEnd,
 }: ScoreboardProps) {
   const sorted = Object.entries(scores)
     .sort(([, a], [, b]) => b - a);
@@ -48,17 +50,23 @@ export default function Scoreboard({
         })}
       </div>
 
-      {onContinue && (
-        <motion.button
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          onClick={onContinue}
-          className="btn-primary text-xl w-full mt-4"
-        >
-          {continueLabel}
-        </motion.button>
-      )}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+        className="w-full flex flex-col gap-3 mt-4"
+      >
+        {onContinue && (
+          <button onClick={onContinue} className="btn-primary text-xl w-full">
+            {continueLabel}
+          </button>
+        )}
+        {onEnd && (
+          <button onClick={onEnd} className="btn-secondary w-full">
+            סיום המשחק 🏁
+          </button>
+        )}
+      </motion.div>
     </div>
   );
 }
