@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: shelter-together
+    runtime: node
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: node server.js
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
